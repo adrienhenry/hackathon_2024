@@ -19,3 +19,12 @@ def write_score(filename, group_id, score):
     db.execute(f"INSERT INTO 'score' (group_id, score, date) VALUES ('{group_id}', {score}, '{datetime.now()}');")
     db.commit()
     db.close()
+
+def get_last_submission_date(filename, group_id):
+    db = sqlite3.connect(filename)
+    data = db.execute(f"SELECT date FROM 'score' WHERE group_id = '{group_id}';").fetchall()
+    db.commit()
+    db.close()
+    if len(data) == 0:
+        return None
+    return datetime.strptime(data[0][0], '%Y-%m-%d %H:%M:%S.%f')   

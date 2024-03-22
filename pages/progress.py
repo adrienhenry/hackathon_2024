@@ -20,3 +20,4 @@ if group_scores.empty:
 else:
     fig = px.line(group_scores, x="date", y="score", title=f"Progress of group {group}")
     st.plotly_chart(fig)
+
